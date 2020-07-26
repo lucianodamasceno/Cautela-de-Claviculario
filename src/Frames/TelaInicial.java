@@ -98,6 +98,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1.setText("NOME , CPF OU MATRÍCULA");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, -1, -1));
 
+        txtBuscaChave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaChaveActionPerformed(evt);
+            }
+        });
         txtBuscaChave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBuscaChaveKeyPressed(evt);
@@ -408,10 +413,14 @@ public class TelaInicial extends javax.swing.JFrame {
     private void txtBuscaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscaPessoaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscaPessoaMouseClicked
+
+    private void txtBuscaChaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaChaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscaChaveActionPerformed
     private void Boot() {
+        
         Chave chave = new Chave();
         chave.EmUso(tbEmUso);
-
     }
 
     public void ClickLinha() {
@@ -421,14 +430,9 @@ public class TelaInicial extends javax.swing.JFrame {
         String col_1 = String.valueOf(tbBusca.getValueAt(linha, 1));
         String col_2 = String.valueOf(tbBusca.getValueAt(linha, 2));
         
-        //JOptionPane.showMessageDialog(null,col_0 + "\n"+ col_1 +"\n"+col_2);
         testeNum.setText(col_0);
         testeNome.setText(col_1);
-        testeDep.setText(col_2);
-                
-            Chave chave = new Chave();
-           // chave.Select(Integer.parseInt(selecao), testeNum, testeNome, testeDep);
-        
+        testeDep.setText(col_2);     
     }
 
     public void BuscaChave() {

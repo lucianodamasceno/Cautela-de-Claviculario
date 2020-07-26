@@ -55,6 +55,7 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         FUNDO_BUSCA_CHAVE = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        btnExcluir = new javax.swing.JButton();
         FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -127,14 +128,15 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/carraca.png"))); // NOI18N
-        btnAlterar.setText("ALTERAR");
+        btnAlterar.setText("ALTERAR ");
+        btnAlterar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAlterar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, 50));
+        getContentPane().add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 140, 50));
 
         txtAtualDep.setEditable(false);
         txtAtualDep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -169,6 +171,12 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         txtNovoNum.setEditable(false);
         txtNovoNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(txtNovoNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 185, 50, -1));
+
+        txtNovoLocal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNovoLocalKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtNovoLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 215, 340, -1));
 
         txtNovoDep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -191,6 +199,18 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOVOS DADOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 420, 120));
+
+        btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lixo.png"))); // NOI18N
+        btnExcluir.setText("EXCLUIR");
+        btnExcluir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.red, java.awt.Color.red, java.awt.Color.red, java.awt.Color.red));
+        btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 140, 50));
         getContentPane().add(FUNDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 420));
 
         pack();
@@ -226,7 +246,7 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        int intNovoNum = Integer.parseInt(txtAtualNum.getText());
+        try{
         String strNovoLocal = txtNovoLocal.getText();
         String strNovoDep = txtNovoDep.getText();
         
@@ -235,6 +255,9 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         Chave chave = new Chave();
         chave.AlterarChave(strNovoLocal, strNovoDep, where);
         BuscaChave();
+         }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"CHAVE NÃO SELECIONADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void txtBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyPressed
@@ -254,7 +277,30 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscaMousePressed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        try{
+        int where = Integer.parseInt(txtAtualNum.getText());
+        int escolha = JOptionPane.showConfirmDialog(null, "A EXCLUSÃO NÃO PODERÁ SER DESFEITA! \nCONTINUAR?","EXCLUIR", JOptionPane.YES_NO_OPTION);
+        if(escolha == 0){
+            Chave chave = new Chave();
+            chave.DeletarChave(where);
+            JOptionPane.showMessageDialog(null,"EXCLUSÃO EFETUADA!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+            BuscaChave();
+        }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"CHAVE NÃO SELECIONADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+        }  
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txtNovoLocalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNovoLocalKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        JOptionPane.showMessageDialog(null, " DADOS EM BRANCO", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_txtNovoLocalKeyPressed
+
     public void Atualiza() {
+        BuscaChave();
 
     }
 
@@ -298,6 +344,7 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
     private javax.swing.JPanel FUNDO_BUSCA_CHAVE;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscaChave;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

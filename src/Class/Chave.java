@@ -18,11 +18,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Chave {
 
+    Class_Connection con = new Class_Connection();
     private int intNumChave;
     private String strLocal, strDepartamento;
-    java.sql.Connection Conexao;
-
-    Class_Connection con = new Class_Connection();
+    java.sql.Connection Conexao = con.getConexao();
 
     public Chave(int intNumChave, String strLocal, String strDepartamento) {
         this.intNumChave = intNumChave;
@@ -68,7 +67,6 @@ public class Chave {
 
                 strComandoSQL = Conexao.prepareStatement("INSERT INTO TBChave (Num_Chave, local, departamento)"
                         + "VALUES(?,?,?)");
-
                 strComandoSQL.setInt(1, intNumChave);
                 strComandoSQL.setString(2, strLocal);
                 strComandoSQL.setString(3, strDepartamento);
@@ -86,36 +84,45 @@ public class Chave {
             } catch (Exception Excecao) {
                 JOptionPane.showMessageDialog(null, "Numero ja cadastrado");
             }
-
         }
     }
 
     public void AlterarChave(String strNovoLocal, String strNovoDep, int where) {
         con.Conecta();
         Conexao = con.getConexao();
-
         try {
             PreparedStatement strComandoSQL = null;
-
-//            strComandoSQL = Conexao.prepareStatement("UPDATE TBChave SET local ='" + strNovoLocal + "',"
-//                    + "departamento ='" + strNovoDep + "' WHERE Num_Chave =" + where);
-
-
             strComandoSQL = Conexao.prepareStatement("UPDATE TBChave SET local ='" + strNovoLocal + "',"
                     + "departamento ='" + strNovoDep + "' WHERE Num_Chave =" + where);
-
-             
             int intRegistro = strComandoSQL.executeUpdate();
             if (intRegistro != 0) {
-            JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-            con.Comando.close();
-            con.Conexao.close();
-            
+                JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                con.Comando.close();
+                con.Conexao.close();
             }
-            
+
         } catch (Exception Excecao) {
             JOptionPane.showMessageDialog(null, "ERROR");
         }
+    }
+
+    public void DeletarChave(int where) {
+        con.Conecta();
+        Conexao = con.getConexao();
+        try {
+            PreparedStatement strComandoSQL = null;
+
+            strComandoSQL = Conexao.prepareStatement("DELETE from TBChave WHERE Num_Chave =" + where);
+            int intRegistro = strComandoSQL.executeUpdate();
+            if (intRegistro == 0) {
+                JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                con.Comando.close();
+                con.Conexao.close();
+            }
+        } catch (Exception Excecao) {
+            JOptionPane.showMessageDialog(null, "ERROR");
+        }
+
     }
 
     public int TotLinhas() {
@@ -135,7 +142,7 @@ public class Chave {
         return tot;
     }
 
-       public void Consulta(String BuscaChave, JTextField Num, JTextField Local) {
+    public void Consulta(String BuscaChave, JTextField Num, JTextField Local) {
         if (BuscaChave != null) {
 
             try {
@@ -176,6 +183,7 @@ public class Chave {
                     con.rsBusca.getBoolean(4),});
             }
             con.Conexao.close();
+            con.Comando.close();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar os dados!");
@@ -204,7 +212,6 @@ public class Chave {
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados!");
-
         }
     }
 
