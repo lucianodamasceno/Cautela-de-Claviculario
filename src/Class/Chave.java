@@ -18,11 +18,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Chave {
 
+    Class_Connection con = new Class_Connection();
     private int intNumChave;
     private String strLocal, strDepartamento;
-    java.sql.Connection Conexao;
-
-    Class_Connection con = new Class_Connection();
+    java.sql.Connection Conexao = con.getConexao();
 
     public Chave(int intNumChave, String strLocal, String strDepartamento) {
         this.intNumChave = intNumChave;
@@ -61,61 +60,69 @@ public class Chave {
     public void InsertChave() {
         con.Conecta();
         Conexao = con.getConexao();
+        PreparedStatement strComandoSQL = null;
 
         if ((intNumChave != 0) && (strLocal != null) && (strDepartamento != null)) {
             try {
-                PreparedStatement strComandoSQL = null;
 
                 strComandoSQL = Conexao.prepareStatement("INSERT INTO TBChave (Num_Chave, local, departamento)"
                         + "VALUES(?,?,?)");
-
                 strComandoSQL.setInt(1, intNumChave);
                 strComandoSQL.setString(2, strLocal);
                 strComandoSQL.setString(3, strDepartamento);
                 int intRegistro = strComandoSQL.executeUpdate();
                 if (intRegistro != 0) {
                     JOptionPane.showMessageDialog(null, "Chave Nº: " + intNumChave + "\nLocal: " + strLocal + "\nDepartamento: "
-                            + strDepartamento, "CADASTRO EFETUADO", JOptionPane.INFORMATION_MESSAGE);
+                            + strDepartamento, "CADASTRO EFETUADO!", JOptionPane.INFORMATION_MESSAGE);
                     con.getComando().close();
                     con.Conexao.close();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Registro não adicionado !", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "CHAVE NÃO ADICIONADA!!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
                     con.Comando.close();
                     con.Conexao.close();
                 }
             } catch (Exception Excecao) {
-                JOptionPane.showMessageDialog(null, "Numero ja cadastrado");
+                JOptionPane.showMessageDialog(null, "CHAVE JÁ CADASTRADA!");
             }
-
         }
     }
 
     public void AlterarChave(String strNovoLocal, String strNovoDep, int where) {
         con.Conecta();
         Conexao = con.getConexao();
+        try {
+            PreparedStatement strComandoSQL = null;
+            strComandoSQL = Conexao.prepareStatement("UPDATE TBChave SET local ='" + strNovoLocal + "',"
+                    + "departamento ='" + strNovoDep + "' WHERE Num_Chave =" + where);
+            int intRegistro = strComandoSQL.executeUpdate();
+            if (intRegistro != 0) {
+                JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                con.Comando.close();
+                con.Conexao.close();
+            }
 
+        } catch (Exception Excecao) {
+            JOptionPane.showMessageDialog(null, "ERROR AO ALTERAR");
+        }
+    }
+
+    public void DeletarChave(int where) {
+        con.Conecta();
+        Conexao = con.getConexao();
         try {
             PreparedStatement strComandoSQL = null;
 
-//            strComandoSQL = Conexao.prepareStatement("UPDATE TBChave SET local ='" + strNovoLocal + "',"
-//                    + "departamento ='" + strNovoDep + "' WHERE Num_Chave =" + where);
-
-
-            strComandoSQL = Conexao.prepareStatement("UPDATE TBChave SET local ='" + strNovoLocal + "',"
-                    + "departamento ='" + strNovoDep + "' WHERE Num_Chave =" + where);
-
-             
+            strComandoSQL = Conexao.prepareStatement("DELETE from TBChave WHERE Num_Chave =" + where);
             int intRegistro = strComandoSQL.executeUpdate();
-            if (intRegistro != 0) {
-            JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-            con.Comando.close();
-            con.Conexao.close();
-            
+            if (intRegistro == 0) {
+                JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                con.Comando.close();
+                con.Conexao.close();
             }
-            
         } catch (Exception Excecao) {
             JOptionPane.showMessageDialog(null, "ERROR");
         }
+
     }
 
     public int TotLinhas() {
@@ -123,19 +130,19 @@ public class Chave {
         int tot = 0;
         try {
             PreparedStatement strComandoSQL;
-            strComandoSQL = con.Conexao.prepareStatement("SELECT * FROM TBChave");
+            strComandoSQL = con.Conexao.prepareStatement("SELECT * FROM TBChave WHERE local != 'VAZIO'");
             con.rsBusca = strComandoSQL.executeQuery();
             while (con.rsBusca.next()) {
                 tot = con.rsBusca.getRow();
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao obter total de chaves",
+            JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS TOTAIS",
                     "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
         }
         return tot;
     }
 
-       public void Consulta(String BuscaChave, JTextField Num, JTextField Local) {
+    public void Consulta(String BuscaChave, JTextField Num, JTextField Local) {
         if (BuscaChave != null) {
 
             try {
@@ -150,15 +157,15 @@ public class Chave {
                 } else {
                     JOptionPane.showMessageDialog(null, "Chave não encontrada !", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
                 }
-                con.Comando.cancel();
+                con.Comando.close();
                 con.Conexao.close();
             } catch (SQLException Excecao) {
-                JOptionPane.showMessageDialog(null, "Erro em busca por local");
+                JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS NA BUSCA");
             }
         }
     }
 
-    public void TabelaBusca(JTable tbBusca, String Busca) {
+    public void TabelaBuscaChave(JTable tbBusca, String Busca) {
         con.Conecta();
         DefaultTableModel modelo = (DefaultTableModel) tbBusca.getModel();
         modelo.setNumRows(0);
@@ -166,7 +173,7 @@ public class Chave {
         try {
             PreparedStatement pstmstrComandoSQL = null;
             pstmstrComandoSQL = con.Conexao.prepareStatement("SELECT * FROM TBChave WHERE local LIKE '*"
-                    + Busca + "*' or Num_Chave LIKE '*" + Busca + "*'");
+                    + Busca + "*' or Num_Chave LIKE '*" + Busca + "*'  ORDER BY Num_Chave");
             con.rsBusca = pstmstrComandoSQL.executeQuery();
             while (con.rsBusca.next()) {
                 modelo.addRow(new Object[]{
@@ -176,9 +183,10 @@ public class Chave {
                     con.rsBusca.getBoolean(4),});
             }
             con.Conexao.close();
+            con.Comando.close();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar os dados!");
+            JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS PARA A TABLE!");
         }
     }
 
@@ -204,7 +212,6 @@ public class Chave {
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar os dados!");
-
         }
     }
 

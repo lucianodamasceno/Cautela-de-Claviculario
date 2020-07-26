@@ -6,10 +6,11 @@
 package Frames;
 
 import Class.Chave;
-import Class.ClassDateTime;
+import Class.Class_DateTime;
 import Class.Class_Connection;
+import Class.Class_ValidaCPF;
+import Class.Pessoa;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +40,6 @@ public class TelaInicial extends javax.swing.JFrame {
         FUNDO_PAINEL = new javax.swing.JPanel();
         txtEmBrancoChave = new javax.swing.JLabel();
         txtEmBrancoPessoa = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         txtBuscaChave = new javax.swing.JTextField();
         txtBuscaPessoa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -49,10 +49,9 @@ public class TelaInicial extends javax.swing.JFrame {
         JFOHoraSaida = new javax.swing.JFormattedTextField();
         JFODataSaida = new javax.swing.JFormattedTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbBuscaPessoa = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbBusca = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        tbBuscaChave = new javax.swing.JTable();
         Fundo_Result_Busca1 = new javax.swing.JPanel();
         FUNDO = new javax.swing.JLabel();
         Fundo_Result_Busca = new javax.swing.JPanel();
@@ -62,12 +61,14 @@ public class TelaInicial extends javax.swing.JFrame {
         FUNDO_PESSOA = new javax.swing.JLabel();
         FUNDO_CHAVE1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        txtTotPessoas = new javax.swing.JTextField();
         txtTotChave = new javax.swing.JTextField();
         testeDep = new javax.swing.JTextField();
         testeNome = new javax.swing.JTextField();
         testeNum = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,11 +94,13 @@ public class TelaInicial extends javax.swing.JFrame {
         txtEmBrancoPessoa.setForeground(new java.awt.Color(102, 102, 102));
         txtEmBrancoPessoa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtEmBrancoPessoa.setText("DEIXAR EM BRANCO PARA LISTAR TUDO");
-        getContentPane().add(txtEmBrancoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 103, -1, 20));
+        getContentPane().add(txtEmBrancoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 103, -1, 20));
 
-        jLabel1.setText("NOME , CPF OU MATRÍCULA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, -1, -1));
-
+        txtBuscaChave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaChaveActionPerformed(evt);
+            }
+        });
         txtBuscaChave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtBuscaChaveKeyPressed(evt);
@@ -109,8 +112,10 @@ public class TelaInicial extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtBuscaPessoaMouseClicked(evt);
             }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtBuscaPessoaMousePressed(evt);
+        });
+        txtBuscaPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscaPessoaKeyPressed(evt);
             }
         });
         getContentPane().add(txtBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(585, 100, 400, 25));
@@ -166,43 +171,16 @@ public class TelaInicial extends javax.swing.JFrame {
         JFODataSaida.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(JFODataSaida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 590, 90, 25));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbBuscaPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "NOME", "CPF", "TEL"
+                "NOME", "CPF", "TELEFONE", "EMPRESA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(jTable1);
-
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 502, 180));
-
-        tbBusca.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "NUM", "LOCAL", "DPTO", "DISP"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -216,23 +194,51 @@ public class TelaInicial extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbBusca.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbBuscaMousePressed(evt);
+        jScrollPane3.setViewportView(tbBuscaPessoa);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 502, 180));
+
+        tbBuscaChave.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "NUM", "LOCAL", "DPTO", "DISPONIVEL"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbBusca);
-        if (tbBusca.getColumnModel().getColumnCount() > 0) {
-            tbBusca.getColumnModel().getColumn(0).setPreferredWidth(20);
-            tbBusca.getColumnModel().getColumn(1).setPreferredWidth(80);
-            tbBusca.getColumnModel().getColumn(2).setPreferredWidth(25);
-            tbBusca.getColumnModel().getColumn(3).setPreferredWidth(10);
+        tbBuscaChave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbBuscaChaveChaveMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbBuscaChave);
+        if (tbBuscaChave.getColumnModel().getColumnCount() > 0) {
+            tbBuscaChave.getColumnModel().getColumn(0).setMinWidth(30);
+            tbBuscaChave.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tbBuscaChave.getColumnModel().getColumn(1).setMinWidth(90);
+            tbBuscaChave.getColumnModel().getColumn(1).setPreferredWidth(90);
+            tbBuscaChave.getColumnModel().getColumn(2).setMinWidth(30);
+            tbBuscaChave.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tbBuscaChave.getColumnModel().getColumn(3).setMinWidth(10);
+            tbBuscaChave.getColumnModel().getColumn(3).setPreferredWidth(10);
         }
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 500, 180));
-
-        jLabel2.setText("NÚMERO OU LOCAL");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         Fundo_Result_Busca1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOCALIZADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         Fundo_Result_Busca1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -276,14 +282,16 @@ public class TelaInicial extends javax.swing.JFrame {
         FUNDO_CHAVE1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BUSCAR CHAVE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         getContentPane().add(FUNDO_CHAVE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 100));
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel9.setText("CHAVES TOTAIS:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, 20));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 425, -1, 20));
+        getContentPane().add(txtTotPessoas, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 430, 30, 20));
 
         txtTotChave.setEditable(false);
-        txtTotChave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtTotChave.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         txtTotChave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTotChave.setMaximumSize(new java.awt.Dimension(50, 55));
-        getContentPane().add(txtTotChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, 30, 20));
+        getContentPane().add(txtTotChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 425, 30, 20));
 
         testeDep.setEditable(false);
         testeDep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -302,6 +310,10 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 520, 380));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabel3.setText("PESSOAS TOTAIS:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, -1, 20));
 
         jMenu1.setText("CADASTRAR");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -368,7 +380,7 @@ public class TelaInicial extends javax.swing.JFrame {
         if (!"".equals(txtBuscaChave) | !"".equals(txtBuscaPessoa)) {
             btnRegistrar.setEnabled(true);
 
-            ClassDateTime time = new ClassDateTime();
+            Class_DateTime time = new Class_DateTime();
             JFODataSaida.setText(time.getDia());
             JFOHoraSaida.setText(time.getHora());
             Boot();
@@ -382,6 +394,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void btnBuscaPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaPessoaActionPerformed
         // TODO add your handling code here:
+        BuscaPessoa();
     }//GEN-LAST:event_btnBuscaPessoaActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -389,46 +402,49 @@ public class TelaInicial extends javax.swing.JFrame {
         new TelaAlteracaoChave().setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void tbBuscaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBuscaMousePressed
-        // TODO add your handling code here:
-        
-        ClickLinha();    
-    }//GEN-LAST:event_tbBuscaMousePressed
+    private void tbBuscaChaveChaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBuscaChaveChaveMousePressed
+        // TODO add your handling code here:       
+        ClickLinhaChave();
+    }//GEN-LAST:event_tbBuscaChaveChaveMousePressed
 
     private void txtBuscaChaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaChaveKeyPressed
         // TODO add your handling code here:
-            if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-            BuscaChave();  
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            BuscaChave();
     }//GEN-LAST:event_txtBuscaChaveKeyPressed
 
-    private void txtBuscaPessoaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscaPessoaMousePressed
+    private void txtBuscaChaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaChaveActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscaPessoaMousePressed
+
+    }//GEN-LAST:event_txtBuscaChaveActionPerformed
 
     private void txtBuscaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscaPessoaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscaPessoaMouseClicked
+
+    private void txtBuscaPessoaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaPessoaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            BuscaPessoa();
+    }//GEN-LAST:event_txtBuscaPessoaKeyPressed
     private void Boot() {
+
         Chave chave = new Chave();
         chave.EmUso(tbEmUso);
+        Class_ValidaCPF valida = new Class_ValidaCPF();
 
     }
 
-    public void ClickLinha() {
-        
-        int linha = tbBusca.getSelectedRow();
-        String col_0 = String.valueOf(tbBusca.getValueAt(linha, 0));
-        String col_1 = String.valueOf(tbBusca.getValueAt(linha, 1));
-        String col_2 = String.valueOf(tbBusca.getValueAt(linha, 2));
-        
-        //JOptionPane.showMessageDialog(null,col_0 + "\n"+ col_1 +"\n"+col_2);
+    public void ClickLinhaChave() {
+
+        int linha = tbBuscaChave.getSelectedRow();
+        String col_0 = String.valueOf(tbBuscaChave.getValueAt(linha, 0));
+        String col_1 = String.valueOf(tbBuscaChave.getValueAt(linha, 1));
+        String col_2 = String.valueOf(tbBuscaChave.getValueAt(linha, 2));
+
         testeNum.setText(col_0);
         testeNome.setText(col_1);
         testeDep.setText(col_2);
-                
-            Chave chave = new Chave();
-           // chave.Select(Integer.parseInt(selecao), testeNum, testeNome, testeDep);
-        
     }
 
     public void BuscaChave() {
@@ -438,11 +454,19 @@ public class TelaInicial extends javax.swing.JFrame {
         Chave chave = new Chave();
 
         Busca = txtBuscaChave.getText();
-        chave.TabelaBusca(tbBusca, Busca);
+        chave.TabelaBuscaChave(tbBuscaChave, Busca);
         txtTotChave.setText(Integer.toString(chave.TotLinhas()));
     }
 
-    public void Excluir(int index) {
+    public void BuscaPessoa() {
+        String Busca = null;
+        Class_Connection con = new Class_Connection();
+        con.Conecta();
+        Pessoa pessoa = new Pessoa();
+
+        Busca = txtBuscaPessoa.getText();
+        pessoa.TabelaBuscaPessoa(tbBuscaPessoa, Busca);
+        txtTotPessoas.setText(Integer.toString(pessoa.TotLinhas()));
 
     }
 
@@ -494,8 +518,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscaChave;
     private javax.swing.JButton btnBuscaPessoa;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -510,8 +533,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable tbBusca;
+    private javax.swing.JTable tbBuscaChave;
+    private javax.swing.JTable tbBuscaPessoa;
     private javax.swing.JTable tbEmUso;
     private javax.swing.JTextField testeDep;
     private javax.swing.JTextField testeNome;
@@ -521,5 +544,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel txtEmBrancoChave;
     private javax.swing.JLabel txtEmBrancoPessoa;
     private javax.swing.JTextField txtTotChave;
+    private javax.swing.JTextField txtTotPessoas;
     // End of variables declaration//GEN-END:variables
 }

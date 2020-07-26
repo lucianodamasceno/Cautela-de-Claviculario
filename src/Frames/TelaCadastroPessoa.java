@@ -1,6 +1,11 @@
 package Frames;
 
-import Class.ClassConnection;
+import Class.Class_Connection;
+import Class.Class_ValidaCPF;
+import Class.Pessoa;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +18,6 @@ import Class.ClassConnection;
  */
 public class TelaCadastroPessoa extends javax.swing.JFrame {
 
-
     /**
      * Creates new form Cadastro
      */
@@ -21,33 +25,54 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
         initComponents();
 
     }
-    
-    public void InsereDados() {
 
-        ClassConnection conecction = new ClassConnection();
-        String strNome = txtNome.getText();
-        String strCPF = JformCPF.getText();
-        String strEmpresa = txtEmpresa.getText();
-        String strTelefone = JFormTelefone.getText();
-        do {
-            conecction.setStrNome(strNome);
-        } while (strNome == null);
-        do {
-            conecction.setStrCPF(strCPF);
-        } while (strCPF == null);
-        do {
-            conecction.setStrEmpresa(strEmpresa);
-        } while (strEmpresa == null);
-        do {
-            conecction.setStrTelefone(strTelefone);
-        } while(strTelefone == null);
-        conecction.Conecta();
-        conecction.InsertPessoa();
-        txtAdicionado.setText("Nome: "+ strNome + "\nCPF: "+strCPF + "\nEmpresa: " + strEmpresa + "Telefone: " + strTelefone);
+    public void CadastrarPessoa() {
+        boolean Checkcpf = false;
+        String[] ObjCpf = txtCPF.getText().split("-");
+        String cpf = ObjCpf[0] + ObjCpf[1] + ObjCpf[2] + ObjCpf[3];
+        Class_ValidaCPF valida = new Class_ValidaCPF();
 
-}
+        Checkcpf = valida.validaCPF(cpf);
+        if (Checkcpf == true) {
 
-@SuppressWarnings("unchecked")
+            Class_Connection con = new Class_Connection();
+            con.Conecta();
+
+            Pessoa pessoa = new Pessoa();
+
+            try {
+                String strNome = txtNome.getText().toUpperCase();
+                String strTelefone = txtTelefone.getText();
+                String strEmpresa = txtEmpresa.getText().toUpperCase();
+
+                do {
+                    pessoa.setStrNome(strNome);
+                } while (strNome == null);
+                do {
+                    pessoa.setStrCPF(cpf);
+                } while (cpf == null);
+                do {
+                    pessoa.setStrTelefone(strTelefone);
+                } while (strTelefone == null);
+                do {
+                    pessoa.setStrEmpresa(strEmpresa);
+                } while (strEmpresa == null);
+                pessoa.InsertChave();
+                TelaInicial tela = new TelaInicial();
+                tela.BuscaPessoa();
+                dispose();
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "CPF INVÁLIDO!");
+        }
+
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -56,75 +81,79 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtEmpresa = new javax.swing.JTextField();
-        btnOk = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAdicionado = new javax.swing.JTextArea();
-        JformCPF = new javax.swing.JFormattedTextField();
+        txtCPF = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
-        JFormTelefone = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        btnCadastrar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        FUNDO = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("CADASTRO DE PESSOA");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLABELNOME.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLABELNOME.setText("NOME:");
-        getContentPane().add(jLABELNOME, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
+        getContentPane().add(jLABELNOME, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, 20));
 
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 260, -1));
-
-        jLabel2.setText("CPF:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 30, -1));
-
-        jLabel3.setText("EMPRESA:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        getContentPane().add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 190, -1));
-
-        btnOk.setText("CADASTRAR");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
             }
         });
-        getContentPane().add(btnOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 120, 30));
+        getContentPane().add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 320, 20));
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("CPF:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 20));
 
-        txtAdicionado.setEditable(false);
-        txtAdicionado.setBackground(new java.awt.Color(240, 240, 240));
-        txtAdicionado.setColumns(20);
-        txtAdicionado.setRows(5);
-        jScrollPane1.setViewportView(txtAdicionado);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 400, 70));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("EMPRESA:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 20));
+        getContentPane().add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 190, 20));
 
         try {
-            JformCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###-###-##")));
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###-###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        getContentPane().add(JformCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 110, -1));
+        txtCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCPFKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 110, 20));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("TELEFONE:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
 
         try {
-            JFormTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        getContentPane().add(JFormTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 110, -1));
+        getContentPane().add(txtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 110, 20));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "RESULTADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 400, 90));
-        getContentPane().add(FUNDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 310));
+        btnCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/carraca.png"))); // NOI18N
+        btnCadastrar.setText("CADASTRAR ");
+        btnCadastrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 160, 150, 50));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CADASTRO DE PESSOA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 230));
 
         pack();
         setLocationRelativeTo(null);
@@ -134,13 +163,30 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-    InsereDados();
-    txtNome.setText(null);
-    JformCPF.setText(null);
-    txtEmpresa.setText(null);
-    JFormTelefone.setText(null);
-    }//GEN-LAST:event_btnOkActionPerformed
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if ((txtNome.getText() != null) && (txtCPF.getText() != null)) {
+                CadastrarPessoa();
+            } else {
+                JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if ((txtNome.getText() != null) && (txtCPF.getText() != null)) {
+                CadastrarPessoa();
+            } else {
+                JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtCPFKeyPressed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        CadastrarPessoa();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,30 +203,20 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(TelaCadastroPessoa.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -196,18 +232,15 @@ catch (javax.swing.UnsupportedLookAndFeelException ex) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel FUNDO;
-    private javax.swing.JFormattedTextField JFormTelefone;
-    private javax.swing.JFormattedTextField JformCPF;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JLabel jLABELNOME;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtAdicionado;
+    private javax.swing.JFormattedTextField txtCPF;
     private javax.swing.JTextField txtEmpresa;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

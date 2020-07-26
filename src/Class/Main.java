@@ -15,8 +15,6 @@ public class Main {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        ClassConnection conection = new ClassConnection();
-        conection.Conecta();
         new TelaInicial().setVisible(true);
         
     }

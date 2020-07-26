@@ -11,7 +11,7 @@ import java.util.Calendar;
  *
  * @author luciano
  */
-public class ClassDateTime {
+public class Class_DateTime {
 
     private Calendar c = Calendar.getInstance();
     private int intDia;
