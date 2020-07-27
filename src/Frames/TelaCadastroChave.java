@@ -44,8 +44,10 @@ public class TelaCadastroChave extends javax.swing.JFrame {
             } while (strDepartamento == null);
             chave.InsertChave();
             TelaInicial tela = new TelaInicial();
+            txtNumero.setText(null);
+            txtLocal.setText(null);
+            txtDepartamento.setText(null);
             tela.BuscaChave();
-            dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
         }

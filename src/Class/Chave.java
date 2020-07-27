@@ -102,7 +102,7 @@ public class Chave {
             }
 
         } catch (Exception Excecao) {
-            JOptionPane.showMessageDialog(null, "ERROR AO ALTERAR");
+            JOptionPane.showMessageDialog(null, "ERROR");
         }
     }
 
