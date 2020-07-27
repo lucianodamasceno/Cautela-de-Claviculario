@@ -96,9 +96,6 @@ public class TelaInicial extends javax.swing.JFrame {
         txtEmBrancoPessoa.setText("DEIXAR EM BRANCO PARA LISTAR TUDO");
         getContentPane().add(txtEmBrancoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 103, -1, 20));
 
-        jLabel1.setText("NOME , CPF OU MATRÍCULA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, -1, -1));
-
         txtBuscaChave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscaChaveActionPerformed(evt);
@@ -425,25 +422,29 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscaPessoaMouseClicked
 
-    private void txtBuscaChaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaChaveActionPerformed
+    private void txtBuscaPessoaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaPessoaKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscaChaveActionPerformed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            BuscaPessoa();
+    }//GEN-LAST:event_txtBuscaPessoaKeyPressed
     private void Boot() {
-        
+
         Chave chave = new Chave();
         chave.EmUso(tbEmUso);
+        Class_ValidaCPF valida = new Class_ValidaCPF();
+
     }
 
-    public void ClickLinha() {
-        
-        int linha = tbBusca.getSelectedRow();
-        String col_0 = String.valueOf(tbBusca.getValueAt(linha, 0));
-        String col_1 = String.valueOf(tbBusca.getValueAt(linha, 1));
-        String col_2 = String.valueOf(tbBusca.getValueAt(linha, 2));
-        
+    public void ClickLinhaChave() {
+
+        int linha = tbBuscaChave.getSelectedRow();
+        String col_0 = String.valueOf(tbBuscaChave.getValueAt(linha, 0));
+        String col_1 = String.valueOf(tbBuscaChave.getValueAt(linha, 1));
+        String col_2 = String.valueOf(tbBuscaChave.getValueAt(linha, 2));
+
         testeNum.setText(col_0);
         testeNome.setText(col_1);
-        testeDep.setText(col_2);     
+        testeDep.setText(col_2);
     }
 
     public void BuscaChave() {
