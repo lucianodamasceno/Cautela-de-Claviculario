@@ -223,7 +223,7 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         Class_Connection connection = new Class_Connection();
         connection.Conecta();
         Busca = txtBusca.getText();
-        chave.TabelaBusca(tbBusca, Busca);
+        chave.TabelaBuscaChave(tbBusca, Busca);
     }
 
     public void ClickLinha() {
