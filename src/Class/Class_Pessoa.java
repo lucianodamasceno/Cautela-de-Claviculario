@@ -15,20 +15,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luciano
  */
-public class Pessoa {
+public class Class_Pessoa {
 
     Class_Connection con = new Class_Connection();
     private String strNome, strCPF, strEmpresa, strTelefone;
     java.sql.Connection Conexao = con.getConexao();
 
-    public Pessoa(String strNome, String strCPF, String strEmpresa, String strTelefone) {
+    public Class_Pessoa(String strNome, String strCPF, String strEmpresa, String strTelefone) {
         this.strNome = strNome;
         this.strCPF = strCPF;
         this.strEmpresa = strEmpresa;
         this.strTelefone = strTelefone;
     }
 
-    public Pessoa() {
+    public Class_Pessoa() {
 
     }
 
@@ -54,8 +54,7 @@ public class Pessoa {
 
     public void setStrTelefone(String strTelefone) {
         this.strTelefone = strTelefone;
-        
-        
+
     }
 
     public String getStrCPF() {
@@ -86,7 +85,7 @@ public class Pessoa {
                     con.getComando().close();
                     con.Conexao.close();
                 } else {
-                    JOptionPane.showMessageDialog(null, "REGISTRO ADICIONADO!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "ERRO AO REGISTRAR!", "Mensagem", JOptionPane.INFORMATION_MESSAGE);
                     con.Comando.close();
                     con.Conexao.close();
                 }
@@ -97,7 +96,43 @@ public class Pessoa {
         }
 
     }
-    
+
+    public void DeletarPessoa(String where) {
+        con.Conecta();
+        Conexao = con.Conexao;
+        try {
+            PreparedStatement strComandoSQL = null;
+            strComandoSQL = Conexao.prepareStatement(" DELETE from TBPessoa WHERE CPF ='" + where + "'");
+            int intRegistro = strComandoSQL.executeUpdate();
+            if (intRegistro == 0) {
+                JOptionPane.showMessageDialog(null, "EXLUSÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                con.Comando.close();
+                con.Conexao.close();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AO EXLUIR");
+
+        }
+    }
+
+    public void AlterarPessoa(String strNovoNome, String strNovoCPF, String strNovoTel, String strNovaEmp, String where) {
+        con.Conecta();
+        Conexao = con.getConexao();
+        try {
+            PreparedStatement strComandoSQL = null;
+            strComandoSQL = Conexao.prepareStatement("UPDATE TBPessoa SET nome ='" + strNovoNome
+                    + "', CPF ='" + strNovoCPF + "', telefone ='" + strNovoTel + "', empresa ='" + strNovaEmp + "' WHERE CPF ='" + where + "'");
+            int intRegistro = strComandoSQL.executeUpdate();
+            if (intRegistro != 0) {
+                JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                con.Comando.close();
+                con.Conexao.close();
+            }
+        } catch (Exception Excecao) {
+            JOptionPane.showMessageDialog(null, "ERROR NA ALTERAÇÃO");
+        }
+    }
+
     public void TabelaBuscaPessoa(JTable tbBusca, String Busca) {
         con.Conecta();
         DefaultTableModel modelo = (DefaultTableModel) tbBusca.getModel();
@@ -106,14 +141,15 @@ public class Pessoa {
         try {
             PreparedStatement pstmstrComandoSQL = null;
             pstmstrComandoSQL = con.Conexao.prepareStatement("SELECT * FROM TBPessoa WHERE nome LIKE '*"
-                    + Busca + "*' or CPF LIKE '*" + Busca + "*'  ORDER BY nome");
+                    + Busca + "*' or CPF LIKE '*" + Busca + "*'  ORDER BY idPessoa");
             con.rsBusca = pstmstrComandoSQL.executeQuery();
             while (con.rsBusca.next()) {
                 modelo.addRow(new Object[]{
+                    con.rsBusca.getString(5),
                     con.rsBusca.getString(1),
                     con.rsBusca.getString(2),
                     con.rsBusca.getString(4),
-                    con.rsBusca.getString(3),});
+                    con.rsBusca.getString(3)});
             }
             con.Conexao.close();
             con.Comando.close();
@@ -122,7 +158,7 @@ public class Pessoa {
             JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS PARA A TABLE!");
         }
     }
-    
+
     public int TotLinhas() {
         con.Conecta();
         int tot = 0;
@@ -139,17 +175,5 @@ public class Pessoa {
         }
         return tot;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

@@ -42,7 +42,7 @@ public class Class_DateTime {
         }
         intAno = c.get(Calendar.YEAR);
         strAno = Integer.toString(intAno);
-        return strDia + strMes + strAno;
+        return strDia+"/"+strMes+"/"+strAno;
     }
 
     public String getHora() {
@@ -58,7 +58,7 @@ public class Class_DateTime {
         } else {
             strMinuto = Integer.toString(intMinuto);
         }
-        return strHora + strMinuto;
+        return strHora+":"+strMinuto;
     }
 
 } // FINAL

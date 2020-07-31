@@ -5,7 +5,7 @@
  */
 package Frames;
 
-import Class.Chave;
+import Class.Class_Chave;
 import Class.Class_Connection;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -21,6 +21,7 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
      */
     public TelaAlteracaoChave() {
         initComponents();
+        
     }
 
     /**
@@ -32,11 +33,9 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtEmBrancoChave = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbBusca = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        txtBusca = new javax.swing.JTextField();
+        tbBuscaChave = new javax.swing.JTable();
+        txtBuscaChave = new javax.swing.JTextField();
         btnBuscaChave = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         txtAtualDep = new javax.swing.JTextField();
@@ -45,13 +44,13 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtNovoNum = new javax.swing.JTextField();
         txtNovoLocal = new javax.swing.JTextField();
         txtNovoDep = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        Fundo_Result_Busca = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         FUNDO_BUSCA_CHAVE = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -62,13 +61,7 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtEmBrancoChave.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        txtEmBrancoChave.setForeground(new java.awt.Color(102, 102, 102));
-        txtEmBrancoChave.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtEmBrancoChave.setText("DEIXAR EM BRANCO PARA LISTAR TUDO");
-        getContentPane().add(txtEmBrancoChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 52, -1, 20));
-
-        tbBusca.setModel(new javax.swing.table.DefaultTableModel(
+        tbBuscaChave.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -91,32 +84,24 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbBusca.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbBuscaChave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tbBuscaMousePressed(evt);
+                tbBuscaChaveMousePressed(evt);
             }
         });
-        jScrollPane2.setViewportView(tbBusca);
-        if (tbBusca.getColumnModel().getColumnCount() > 0) {
-            tbBusca.getColumnModel().getColumn(0).setPreferredWidth(10);
+        jScrollPane2.setViewportView(tbBuscaChave);
+        if (tbBuscaChave.getColumnModel().getColumnCount() > 0) {
+            tbBuscaChave.getColumnModel().getColumn(0).setPreferredWidth(10);
         }
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 430, 180));
 
-        jLabel2.setText("NÚMERO OU LOCAL");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
-
-        txtBusca.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtBuscaMousePressed(evt);
-            }
-        });
-        txtBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtBuscaChave.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBuscaKeyPressed(evt);
+                txtBuscaChaveKeyPressed(evt);
             }
         });
-        getContentPane().add(txtBusca, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 340, 25));
+        getContentPane().add(txtBuscaChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 340, 25));
 
         btnBuscaChave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/procurar.png"))); // NOI18N
         btnBuscaChave.addActionListener(new java.awt.event.ActionListener() {
@@ -140,14 +125,14 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
         txtAtualDep.setEditable(false);
         txtAtualDep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtAtualDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 100, -1));
+        getContentPane().add(txtAtualDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 100, 25));
 
         txtAtualLocal.setEditable(false);
-        getContentPane().add(txtAtualLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 340, -1));
+        getContentPane().add(txtAtualLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 340, 25));
 
         txtAtualNum.setEditable(false);
         txtAtualNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtAtualNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 50, -1));
+        getContentPane().add(txtAtualNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 50, 25));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("DPTO:");
@@ -161,26 +146,16 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         jLabel7.setText("NUM:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, -1, 20));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("BUSCA");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DADOS ATUAIS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 420, 130));
 
         txtNovoNum.setEditable(false);
         txtNovoNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtNovoNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 185, 50, -1));
-
-        txtNovoLocal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNovoLocalKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtNovoLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 215, 340, -1));
+        getContentPane().add(txtNovoNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 185, 50, 25));
+        getContentPane().add(txtNovoLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 215, 340, 25));
 
         txtNovoDep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(txtNovoDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 245, 100, -1));
+        getContentPane().add(txtNovoDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 245, 100, 25));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("NUM:");
@@ -189,6 +164,9 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("LOCAL:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 215, -1, 20));
+
+        Fundo_Result_Busca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOCALIZADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        getContentPane().add(Fundo_Result_Busca, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 430, 200));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("DPTO:");
@@ -219,19 +197,19 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
     private void BuscaChave() {
         String Busca = null;
-        Chave chave = new Chave();
+        Class_Chave chave = new Class_Chave();
         Class_Connection connection = new Class_Connection();
         connection.Conecta();
-        Busca = txtBusca.getText();
-        chave.TabelaBuscaChave(tbBusca, Busca);
+        Busca = txtBuscaChave.getText();
+        chave.TabelaBuscaChave(tbBuscaChave, Busca);
     }
 
     public void ClickLinha() {
-        int linha = tbBusca.getSelectedRow();
-        String col_0 = String.valueOf(tbBusca.getValueAt(linha, 0));
-        String col_1 = String.valueOf(tbBusca.getValueAt(linha, 1));
-        String col_2 = String.valueOf(tbBusca.getValueAt(linha, 2));
-        
+        int linha = tbBuscaChave.getSelectedRow();
+        String col_0 = String.valueOf(tbBuscaChave.getValueAt(linha, 0));
+        String col_1 = String.valueOf(tbBuscaChave.getValueAt(linha, 1));
+        String col_2 = String.valueOf(tbBuscaChave.getValueAt(linha, 2));
+
         txtAtualNum.setText(col_0);
         txtNovoNum.setText(col_0);
         txtAtualLocal.setText(col_1);
@@ -240,64 +218,52 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
     private void btnBuscaChaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaChaveActionPerformed
         // TODO add your handling code here:
-        txtBusca.setEditable(true);
+        txtBuscaChave.setEditable(true);
         BuscaChave();
     }//GEN-LAST:event_btnBuscaChaveActionPerformed
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        try{
-        String strNovoLocal = txtNovoLocal.getText();
-        String strNovoDep = txtNovoDep.getText();
-        
-        int where = Integer.parseInt(txtAtualNum.getText());
-        
-        Chave chave = new Chave();
-        chave.AlterarChave(strNovoLocal, strNovoDep, where);
-        BuscaChave();
-         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"CHAVE NÃO SELECIONADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            String strNovoLocal = txtNovoLocal.getText();
+            String strNovoDep = txtNovoDep.getText();
+
+            int where = Integer.parseInt(txtAtualNum.getText());
+
+            Class_Chave chave = new Class_Chave();
+            chave.AlterarChave(strNovoLocal, strNovoDep, where);
+            BuscaChave();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "CHAVE NÃO SELECIONADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void txtBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaKeyPressed
+    private void txtBuscaChaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaChaveKeyPressed
         // TODO add your handling code here:
-        txtEmBrancoChave.setVisible(false);
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             BuscaChave();
-    }//GEN-LAST:event_txtBuscaKeyPressed
+    }//GEN-LAST:event_txtBuscaChaveKeyPressed
 
-    private void tbBuscaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBuscaMousePressed
+    private void tbBuscaChaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBuscaChaveMousePressed
         // TODO add your handling code here:
         ClickLinha();
-        
-    }//GEN-LAST:event_tbBuscaMousePressed
-
-    private void txtBuscaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscaMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscaMousePressed
+    }//GEN-LAST:event_tbBuscaChaveMousePressed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        try{
-        int where = Integer.parseInt(txtAtualNum.getText());
-        int escolha = JOptionPane.showConfirmDialog(null, "A EXCLUSÃO NÃO PODERÁ SER DESFEITA! \nCONTINUAR?","EXCLUIR", JOptionPane.YES_NO_OPTION);
-        if(escolha == 0){
-            Chave chave = new Chave();
-            chave.DeletarChave(where);
-            JOptionPane.showMessageDialog(null,"EXCLUSÃO EFETUADA!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-            BuscaChave();
+        try {
+            int where = Integer.parseInt(txtAtualNum.getText());
+            int escolha = JOptionPane.showConfirmDialog(null, "A EXCLUSÃO NÃO PODERÁ SER DESFEITA! \nCONTINUAR?", "EXCLUIR", JOptionPane.YES_NO_OPTION);
+            if (escolha == 0) {
+                Class_Chave chave = new Class_Chave();
+                chave.DeletarChave(where);
+                JOptionPane.showMessageDialog(null, "EXCLUSÃO EFETUADA!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                BuscaChave();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "CHAVE NÃO SELECIONADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
         }
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null,"CHAVE NÃO SELECIONADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-        }  
     }//GEN-LAST:event_btnExcluirActionPerformed
-
-    private void txtNovoLocalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNovoLocalKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-        JOptionPane.showMessageDialog(null, " DADOS EM BRANCO", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_txtNovoLocalKeyPressed
 
     public void Atualiza() {
         BuscaChave();
@@ -342,12 +308,11 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FUNDO;
     private javax.swing.JPanel FUNDO_BUSCA_CHAVE;
+    private javax.swing.JPanel Fundo_Result_Busca;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscaChave;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -356,12 +321,11 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbBusca;
+    private javax.swing.JTable tbBuscaChave;
     private javax.swing.JTextField txtAtualDep;
     private javax.swing.JTextField txtAtualLocal;
     private javax.swing.JTextField txtAtualNum;
-    private javax.swing.JTextField txtBusca;
-    private javax.swing.JLabel txtEmBrancoChave;
+    private javax.swing.JTextField txtBuscaChave;
     private javax.swing.JTextField txtNovoDep;
     private javax.swing.JTextField txtNovoLocal;
     private javax.swing.JTextField txtNovoNum;

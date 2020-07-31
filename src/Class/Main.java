@@ -15,7 +15,12 @@ public class Main {
 
     public static void main(String[] args) {
         // TODO code application logic here
+        Class_Connection con = new Class_Connection();
+        con.ReadSave();
         new TelaInicial().setVisible(true);
+//        new TelaHistorico().setVisible(true);
+        
+        
         
     }
 }

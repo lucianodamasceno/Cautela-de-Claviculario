@@ -2,7 +2,7 @@ package Frames;
 
 import Class.Class_Connection;
 import Class.Class_ValidaCPF;
-import Class.Pessoa;
+import Class.Class_Pessoa;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -27,6 +27,41 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
     }
 
     public void CadastrarPessoa() {
+        Class_Connection con = new Class_Connection();
+        con.Conecta();
+
+        Class_Pessoa pessoa = new Class_Pessoa();
+        String cpf = txtCPF.getText();
+
+        try {
+            String strNome = txtNome.getText().toUpperCase();
+            String strTelefone = txtTelefone.getText();
+            String strEmpresa = txtEmpresa.getText().toUpperCase();
+
+            do {
+                pessoa.setStrNome(strNome);
+            } while (strNome == null);
+            do {
+                pessoa.setStrCPF(cpf);
+            } while (cpf == null);
+            do {
+                pessoa.setStrTelefone(strTelefone);
+            } while (strTelefone == null);
+            do {
+                pessoa.setStrEmpresa(strEmpresa);
+            } while (strEmpresa == null);
+            pessoa.InsertChave();
+            TelaInicial tela = new TelaInicial();
+            tela.BuscaPessoa();
+            dispose();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    public void ChecaCPF() {
         boolean Checkcpf = false;
         String[] ObjCpf = txtCPF.getText().split("-");
         String cpf = ObjCpf[0] + ObjCpf[1] + ObjCpf[2] + ObjCpf[3];
@@ -34,42 +69,10 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
 
         Checkcpf = valida.validaCPF(cpf);
         if (Checkcpf == true) {
-
-            Class_Connection con = new Class_Connection();
-            con.Conecta();
-
-            Pessoa pessoa = new Pessoa();
-
-            try {
-                String strNome = txtNome.getText().toUpperCase();
-                String strTelefone = txtTelefone.getText();
-                String strEmpresa = txtEmpresa.getText().toUpperCase();
-
-                do {
-                    pessoa.setStrNome(strNome);
-                } while (strNome == null);
-                do {
-                    pessoa.setStrCPF(cpf);
-                } while (cpf == null);
-                do {
-                    pessoa.setStrTelefone(strTelefone);
-                } while (strTelefone == null);
-                do {
-                    pessoa.setStrEmpresa(strEmpresa);
-                } while (strEmpresa == null);
-                pessoa.InsertChave();
-                TelaInicial tela = new TelaInicial();
-                tela.BuscaPessoa();
-                dispose();
-
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-            }
-
+            CadastrarPessoa();
         } else {
             JOptionPane.showMessageDialog(null, "CPF INVÁLIDO!");
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -167,7 +170,7 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if ((txtNome.getText() != null) && (txtCPF.getText() != null)) {
-                CadastrarPessoa();
+                ChecaCPF();
             } else {
                 JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -177,7 +180,7 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
     private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if ((txtNome.getText() != null) && (txtCPF.getText() != null)) {
-                CadastrarPessoa();
+                ChecaCPF();
             } else {
                 JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -185,7 +188,7 @@ public class TelaCadastroPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCPFKeyPressed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        CadastrarPessoa();
+        ChecaCPF();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

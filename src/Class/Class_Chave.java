@@ -16,20 +16,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luciano
  */
-public class Chave {
+public class Class_Chave {
 
     Class_Connection con = new Class_Connection();
     private int intNumChave;
     private String strLocal, strDepartamento;
     java.sql.Connection Conexao = con.getConexao();
 
-    public Chave(int intNumChave, String strLocal, String strDepartamento) {
+    public Class_Chave(int intNumChave, String strLocal, String strDepartamento) {
         this.intNumChave = intNumChave;
         this.strLocal = strLocal;
         this.strDepartamento = strDepartamento;
     }
 
-    public Chave() {
+    public Class_Chave() {
 
     }
 
@@ -102,7 +102,7 @@ public class Chave {
             }
 
         } catch (Exception Excecao) {
-            JOptionPane.showMessageDialog(null, "ERROR");
+            JOptionPane.showMessageDialog(null, "ERROR NA ALTERAÇÃO");
         }
     }
 
@@ -115,12 +115,12 @@ public class Chave {
             strComandoSQL = Conexao.prepareStatement("DELETE from TBChave WHERE Num_Chave =" + where);
             int intRegistro = strComandoSQL.executeUpdate();
             if (intRegistro == 0) {
-                JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "EXLUSÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
                 con.Comando.close();
                 con.Conexao.close();
             }
         } catch (Exception Excecao) {
-            JOptionPane.showMessageDialog(null, "ERROR");
+            JOptionPane.showMessageDialog(null, "ERROR AO EXLUIR");
         }
 
     }
@@ -198,21 +198,27 @@ public class Chave {
         tbChave.getColumnModel().getColumn(0);
         try {
             PreparedStatement pstmstrComandoSQL = null;
-            pstmstrComandoSQL = con.Conexao.prepareStatement("SELECT * FROM TBChave WHERE disponivel = NO");
+            pstmstrComandoSQL = con.Conexao.prepareStatement("SELECT Num_Chave, local, nome, dataSaida, horaSaida from((TBHistorico"
+                    + " INNER JOIN TBChave ON TBHistorico.idChave = TBChave.Num_Chave)"
+                    + " INNER JOIN TBPessoa ON TBHistorico.idPessoa = TBPessoa.idPessoa)");
             con.rsBusca = pstmstrComandoSQL.executeQuery();
             while (con.rsBusca.next()) {
                 modelo.addRow(new Object[]{
                     con.rsBusca.getInt(1),
                     con.rsBusca.getString(2),
                     con.rsBusca.getString(3),
-                    con.rsBusca.getBoolean(4)
-                });
+                    con.rsBusca.getString(4),
+                    con.rsBusca.getString(5)});
             }
             con.Conexao.close();
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados!");
-        }
     }
+    catch (Exception ex
+
+    
+        ) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados!");
+    }
+}
 
 }

@@ -1,6 +1,6 @@
 package Frames;
 
-import Class.Chave;
+import Class.Class_Chave;
 import Class.Class_Connection;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
@@ -26,7 +26,7 @@ public class TelaCadastroChave extends javax.swing.JFrame {
     public void CadastrarChave() {
         Class_Connection con = new Class_Connection();
         con.Conecta();
-        Chave chave = new Chave();
+        Class_Chave chave = new Class_Chave();
 
         try {
             int intNumChave = Integer.parseInt(txtNumero.getText());

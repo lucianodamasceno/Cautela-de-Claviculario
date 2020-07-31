@@ -5,18 +5,24 @@
  */
 package Frames;
 
-import Class.Chave;
+import Class.Class_Cautela;
+import Class.Class_Chave;
 import Class.Class_DateTime;
 import Class.Class_Connection;
-import Class.Class_ValidaCPF;
-import Class.Pessoa;
+import Class.Class_Pessoa;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author luciano
  */
 public class TelaInicial extends javax.swing.JFrame {
+
+    private static int janelaCaChave = 0;
+    private static int janelaCaPessoa = 0;
+    private static int janelaAlteChave = 0;
+    private static int janelaAltePessoa = 0;
 
     /**
      * Creates new form TelaInicial
@@ -37,166 +43,53 @@ public class TelaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        FUNDO_PAINEL = new javax.swing.JPanel();
-        txtEmBrancoChave = new javax.swing.JLabel();
-        txtEmBrancoPessoa = new javax.swing.JLabel();
-        txtBuscaChave = new javax.swing.JTextField();
-        txtBuscaPessoa = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        btnBuscaChave = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
-        btnBuscaPessoa = new javax.swing.JButton();
-        JFOHoraSaida = new javax.swing.JFormattedTextField();
-        JFODataSaida = new javax.swing.JFormattedTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tbBuscaPessoa = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        Fundo_Result_Busca = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbBuscaChave = new javax.swing.JTable();
-        Fundo_Result_Busca1 = new javax.swing.JPanel();
-        FUNDO = new javax.swing.JLabel();
-        Fundo_Result_Busca = new javax.swing.JPanel();
+        FUNDO_CHAVE1 = new javax.swing.JLabel();
+        txtBuscaChave = new javax.swing.JTextField();
+        btnBuscaChave = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtTotChave = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbEmUso = new javax.swing.JTable();
         Fundo_Em_Uso = new javax.swing.JPanel();
-        FUNDO_PESSOA = new javax.swing.JLabel();
-        FUNDO_CHAVE1 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        txtTotPessoas = new javax.swing.JTextField();
-        txtTotChave = new javax.swing.JTextField();
-        testeDep = new javax.swing.JTextField();
-        testeNome = new javax.swing.JTextField();
-        testeNum = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        Fundo_Result_Busca1 = new javax.swing.JPanel();
+        FUNDO = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbBuscaPessoa = new javax.swing.JTable();
+        FUNDO_PESSOA = new javax.swing.JLabel();
+        txtBuscaPessoa = new javax.swing.JTextField();
+        btnBuscaPessoa = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtTotPessoas = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        JFOHoraSaida = new javax.swing.JFormattedTextField();
+        JFODataSaida = new javax.swing.JFormattedTextField();
+        btnRegistrar = new javax.swing.JButton();
+        menuSuperior = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        btnCadastrarChave = new javax.swing.JMenuItem();
+        btnCadastrarPessoa = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-
-        FUNDO_PAINEL.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "CAUTELA DE CHAVE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        btnAlterarChave = new javax.swing.JMenuItem();
+        btnAlterarPessoa = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        btnArquivos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CAUTELA DE CHAVE");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtEmBrancoChave.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        txtEmBrancoChave.setForeground(new java.awt.Color(102, 102, 102));
-        txtEmBrancoChave.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtEmBrancoChave.setText("DEIXAR EM BRANCO PARA LISTAR TUDO");
-        getContentPane().add(txtEmBrancoChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 103, -1, 20));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtEmBrancoPessoa.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        txtEmBrancoPessoa.setForeground(new java.awt.Color(102, 102, 102));
-        txtEmBrancoPessoa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtEmBrancoPessoa.setText("DEIXAR EM BRANCO PARA LISTAR TUDO");
-        getContentPane().add(txtEmBrancoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 103, -1, 20));
-
-        txtBuscaChave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscaChaveActionPerformed(evt);
-            }
-        });
-        txtBuscaChave.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBuscaChaveKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtBuscaChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 400, 25));
-
-        txtBuscaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtBuscaPessoaMouseClicked(evt);
-            }
-        });
-        txtBuscaPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBuscaPessoaKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(585, 100, 400, 25));
-
-        jLabel7.setText("SAÍDA");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 590, -1, 20));
-
-        btnBuscaChave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/procurar.png"))); // NOI18N
-        btnBuscaChave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscaChaveActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscaChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 40, 40));
-
-        btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/carraca.png"))); // NOI18N
-        btnRegistrar.setText("REGISTRAR ");
-        btnRegistrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 570, 150, 60));
-
-        btnBuscaPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/procurar.png"))); // NOI18N
-        btnBuscaPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscaPessoaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(1005, 90, 40, 40));
-
-        JFOHoraSaida.setEditable(false);
-        try {
-            JFOHoraSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        JFOHoraSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JFOHoraSaida.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(JFOHoraSaida, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 590, 70, 25));
-
-        JFODataSaida.setEditable(false);
-        try {
-            JFODataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        JFODataSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        JFODataSaida.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(JFODataSaida, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 590, 90, 25));
-
-        tbBuscaPessoa.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "NOME", "CPF", "TELEFONE", "EMPRESA"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(tbBuscaPessoa);
-
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 502, 180));
+        Fundo_Result_Busca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOCALIZADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        Fundo_Result_Busca.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbBuscaChave.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -221,6 +114,8 @@ public class TelaInicial extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbBuscaChave.setShowGrid(true);
+        tbBuscaChave.setSurrendersFocusOnKeystroke(true);
         tbBuscaChave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tbBuscaChaveChaveMousePressed(evt);
@@ -228,26 +123,53 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbBuscaChave);
         if (tbBuscaChave.getColumnModel().getColumnCount() > 0) {
-            tbBuscaChave.getColumnModel().getColumn(0).setMinWidth(30);
-            tbBuscaChave.getColumnModel().getColumn(0).setPreferredWidth(30);
-            tbBuscaChave.getColumnModel().getColumn(1).setMinWidth(90);
-            tbBuscaChave.getColumnModel().getColumn(1).setPreferredWidth(90);
-            tbBuscaChave.getColumnModel().getColumn(2).setMinWidth(30);
-            tbBuscaChave.getColumnModel().getColumn(2).setPreferredWidth(30);
-            tbBuscaChave.getColumnModel().getColumn(3).setMinWidth(10);
-            tbBuscaChave.getColumnModel().getColumn(3).setPreferredWidth(10);
+            tbBuscaChave.getColumnModel().getColumn(0).setMinWidth(0);
+            tbBuscaChave.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tbBuscaChave.getColumnModel().getColumn(0).setMaxWidth(50);
+            tbBuscaChave.getColumnModel().getColumn(3).setMinWidth(0);
+            tbBuscaChave.getColumnModel().getColumn(3).setPreferredWidth(20);
+            tbBuscaChave.getColumnModel().getColumn(3).setMaxWidth(20);
         }
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 500, 180));
+        Fundo_Result_Busca.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 500, 180));
 
-        Fundo_Result_Busca1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOCALIZADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        Fundo_Result_Busca1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        Fundo_Result_Busca1.add(FUNDO);
+        jPanel2.add(Fundo_Result_Busca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 500, 200));
 
-        getContentPane().add(Fundo_Result_Busca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 500, 200));
+        FUNDO_CHAVE1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        FUNDO_CHAVE1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BUSCAR CHAVE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel2.add(FUNDO_CHAVE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 90));
 
-        Fundo_Result_Busca.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOCALIZADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        getContentPane().add(Fundo_Result_Busca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 500, 200));
+        txtBuscaChave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscaChaveActionPerformed(evt);
+            }
+        });
+        txtBuscaChave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscaChaveKeyPressed(evt);
+            }
+        });
+        jPanel2.add(txtBuscaChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 400, 25));
+
+        btnBuscaChave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/procurar.png"))); // NOI18N
+        btnBuscaChave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaChaveActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBuscaChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 40, 40));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("CHAVES TOTAIS:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, 25));
+
+        txtTotChave.setEditable(false);
+        txtTotChave.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        txtTotChave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTotChave.setMaximumSize(new java.awt.Dimension(50, 55));
+        jPanel2.add(txtTotChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 30, 25));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 520, 330));
 
         tbEmUso.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         tbEmUso.setModel(new javax.swing.table.DefaultTableModel(
@@ -255,12 +177,19 @@ public class TelaInicial extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NUM", "LOCAL", "DPTO"
+                "NUM", "LOCAL", "NOME", "DATA SAÍDA", "HORA SAÍDA"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -268,52 +197,139 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         tbEmUso.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tbEmUso);
+        if (tbEmUso.getColumnModel().getColumnCount() > 0) {
+            tbEmUso.getColumnModel().getColumn(0).setMinWidth(0);
+            tbEmUso.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tbEmUso.getColumnModel().getColumn(0).setMaxWidth(50);
+        }
         tbEmUso.getAccessibleContext().setAccessibleDescription("");
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 450, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 380, 450, 170));
 
         Fundo_Em_Uso.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "EM USO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-        getContentPane().add(Fundo_Em_Uso, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 450, 200));
-
-        FUNDO_PESSOA.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BUSCAR PESSOA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        getContentPane().add(FUNDO_PESSOA, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 500, 100));
-
-        FUNDO_CHAVE1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        FUNDO_CHAVE1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BUSCAR CHAVE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        getContentPane().add(FUNDO_CHAVE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 100));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel9.setText("CHAVES TOTAIS:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 425, -1, 20));
-        getContentPane().add(txtTotPessoas, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 430, 30, 20));
-
-        txtTotChave.setEditable(false);
-        txtTotChave.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        txtTotChave.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtTotChave.setMaximumSize(new java.awt.Dimension(50, 55));
-        getContentPane().add(txtTotChave, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 425, 30, 20));
-
-        testeDep.setEditable(false);
-        testeDep.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        getContentPane().add(testeDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 550, 80, -1));
-
-        testeNome.setEditable(false);
-        getContentPane().add(testeNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 520, 320, -1));
-
-        testeNum.setEditable(false);
-        testeNum.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        testeNum.setMaximumSize(new java.awt.Dimension(50, 90));
-        getContentPane().add(testeNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 50, -1));
+        Fundo_Em_Uso.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(Fundo_Em_Uso, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, 450, 200));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, 520, 380));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 520, 380));
+        Fundo_Result_Busca1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOCALIZADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        Fundo_Result_Busca1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        Fundo_Result_Busca1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Fundo_Result_Busca1.add(FUNDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 246, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel3.setText("PESSOAS TOTAIS:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, -1, 20));
+        tbBuscaPessoa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "NOME", "CPF", "TELEFONE", "EMPRESA"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbBuscaPessoa.setAlignmentX(10.0F);
+        tbBuscaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbBuscaPessoaMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tbBuscaPessoa);
+        if (tbBuscaPessoa.getColumnModel().getColumnCount() > 0) {
+            tbBuscaPessoa.getColumnModel().getColumn(0).setMinWidth(0);
+            tbBuscaPessoa.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tbBuscaPessoa.getColumnModel().getColumn(0).setMaxWidth(40);
+        }
+
+        Fundo_Result_Busca1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 502, 180));
+
+        jPanel1.add(Fundo_Result_Busca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 500, 200));
+
+        FUNDO_PESSOA.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BUSCAR PESSOA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel1.add(FUNDO_PESSOA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 90));
+
+        txtBuscaPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBuscaPessoaMouseClicked(evt);
+            }
+        });
+        txtBuscaPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscaPessoaKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 400, 25));
+
+        btnBuscaPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/procurar.png"))); // NOI18N
+        btnBuscaPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaPessoaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 40, 40));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("PESSOAS TOTAIS:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, 25));
+
+        txtTotPessoas.setEditable(false);
+        txtTotPessoas.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        txtTotPessoas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPanel1.add(txtTotPessoas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 30, 25));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 520, 330));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setText("SAÍDA");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, -1, 20));
+
+        JFOHoraSaida.setEditable(false);
+        try {
+            JFOHoraSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        JFOHoraSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        JFOHoraSaida.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel3.add(JFOHoraSaida, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 560, 70, 25));
+
+        JFODataSaida.setEditable(false);
+        try {
+            JFODataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        JFODataSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        JFODataSaida.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel3.add(JFODataSaida, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 560, 90, 25));
+
+        btnRegistrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/carraca.png"))); // NOI18N
+        btnRegistrar.setText("REGISTRAR ");
+        btnRegistrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 540, 150, 60));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -30, 1080, 630));
 
         jMenu1.setText("CADASTRAR");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -322,40 +338,62 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("CHAVE");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarChave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chave.png"))); // NOI18N
+        btnCadastrarChave.setText("CHAVE");
+        btnCadastrarChave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btnCadastrarChaveActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(btnCadastrarChave);
 
-        jMenuItem2.setText("PESSOA");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrarPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/do-utilizador.png"))); // NOI18N
+        btnCadastrarPessoa.setText("PESSOA");
+        btnCadastrarPessoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                btnCadastrarPessoaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(btnCadastrarPessoa);
 
-        jMenuBar1.add(jMenu1);
+        menuSuperior.add(jMenu1);
 
         jMenu2.setText("ALTERAÇÃO DE DADOS");
 
-        jMenuItem3.setText("CHAVE");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterarChave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/chave.png"))); // NOI18N
+        btnAlterarChave.setText("CHAVE");
+        btnAlterarChave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                btnAlterarChaveActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenu2.add(btnAlterarChave);
 
-        jMenuItem4.setText("PESSOA");
-        jMenu2.add(jMenuItem4);
+        btnAlterarPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/do-utilizador.png"))); // NOI18N
+        btnAlterarPessoa.setText("PESSOA");
+        btnAlterarPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarPessoaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(btnAlterarPessoa);
 
-        jMenuBar1.add(jMenu2);
+        menuSuperior.add(jMenu2);
 
-        setJMenuBar(jMenuBar1);
+        jMenu3.setText("CONFIGURAÇÃO");
+
+        btnArquivos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/base-de-dadosx24.png"))); // NOI18N
+        btnArquivos.setText("ARQUIVOS");
+        btnArquivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArquivosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btnArquivos);
+
+        menuSuperior.add(jMenu3);
+
+        setJMenuBar(menuSuperior);
 
         pack();
         setLocationRelativeTo(null);
@@ -365,26 +403,29 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void btnCadastrarChaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarChaveActionPerformed
         // TODO add your handling code here:
-        new TelaCadastroChave().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        if (janelaCaChave != 0) {
+            JOptionPane.showMessageDialog(null, "JANELA JÁ ESTÁ ABERTA!");
+        } else {
+            new TelaCadastroChave().setVisible(true);
+            janelaCaChave++;
+        }
+    }//GEN-LAST:event_btnCadastrarChaveActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void btnCadastrarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarPessoaActionPerformed
         // TODO add your handling code here:
-        new TelaCadastroPessoa().setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        if (janelaCaPessoa != 0) {
+            JOptionPane.showMessageDialog(null, "JANELA JÁ ESTÁ ABERTA!");
+        } else {
+            new TelaCadastroPessoa().setVisible(true);
+            janelaCaPessoa++;
+        }
+
+    }//GEN-LAST:event_btnCadastrarPessoaActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-
-        if (!"".equals(txtBuscaChave) | !"".equals(txtBuscaPessoa)) {
-            btnRegistrar.setEnabled(true);
-
-            Class_DateTime time = new Class_DateTime();
-            JFODataSaida.setText(time.getDia());
-            JFOHoraSaida.setText(time.getHora());
-            Boot();
-        }
+        Cautela();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscaChaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaChaveActionPerformed
@@ -397,10 +438,15 @@ public class TelaInicial extends javax.swing.JFrame {
         BuscaPessoa();
     }//GEN-LAST:event_btnBuscaPessoaActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void btnAlterarChaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarChaveActionPerformed
         // TODO add your handling code here:
-        new TelaAlteracaoChave().setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+        if (janelaAlteChave != 0) {
+            JOptionPane.showMessageDialog(null, "JANELA JÁ ESTÁ ABERTA!");
+        } else {
+            new TelaAlteracaoChave().setVisible(true);
+            janelaAlteChave++;
+        }
+    }//GEN-LAST:event_btnAlterarChaveActionPerformed
 
     private void tbBuscaChaveChaveMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBuscaChaveChaveMousePressed
         // TODO add your handling code here:       
@@ -427,12 +473,95 @@ public class TelaInicial extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             BuscaPessoa();
     }//GEN-LAST:event_txtBuscaPessoaKeyPressed
+
+    private void btnAlterarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarPessoaActionPerformed
+        // TODO add your handling code here:
+        if (janelaAltePessoa != 0) {
+            JOptionPane.showMessageDialog(null, "JANELA JÁ ESTÁ ABERTA!");
+        } else {
+
+            new TelaAlteracaoPessoa().setVisible(true);
+            janelaAltePessoa++;
+        }
+    }//GEN-LAST:event_btnAlterarPessoaActionPerformed
+
+    private void btnArquivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivosActionPerformed
+        AlteraChaminhoBD();
+    }//GEN-LAST:event_btnArquivosActionPerformed
+
+    private void tbBuscaPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBuscaPessoaMouseClicked
+        // TODO add your handling code here:
+        clickLinhaPessoa();
+    }//GEN-LAST:event_tbBuscaPessoaMouseClicked
     private void Boot() {
-
-        Chave chave = new Chave();
+        Class_Chave chave = new Class_Chave();
         chave.EmUso(tbEmUso);
-        Class_ValidaCPF valida = new Class_ValidaCPF();
+      //  ChecaCaminhoBD();
+        BuscaChave();
+        BuscaPessoa();
 
+    }
+
+    public void Cautela() {
+        Class_Cautela cautela = new Class_Cautela();
+        Class_DateTime time = new Class_DateTime();
+        int linhac = tbBuscaChave.getSelectedRow();
+        String dispo = String.valueOf(tbBuscaChave.getValueAt(linhac, 3));
+        if (dispo == "true") {
+            try {
+
+                String col_0c = String.valueOf(tbBuscaChave.getValueAt(linhac, 0));
+                int linhap = tbBuscaPessoa.getSelectedRow();
+                String col_0p = String.valueOf(tbBuscaPessoa.getValueAt(linhap, 0));
+                
+                String dataS = time.getDia();
+                String horaS = time.getHora();
+
+                cautela.inseret(Integer.parseInt(col_0p), Integer.parseInt(col_0c), dataS, horaS);
+                Boot();
+                
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "DADOS NÃO SELECIONADOS!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "CHAVE NÃO DISPONÍVEL!");
+        }
+
+    }
+
+    public void ChecaCaminhoBD() {
+        Class_Connection con = new Class_Connection();
+        String caminho = con.getLocalBD();
+        if (caminho.contains("null") || !caminho.contains("C:")) {
+            String LocalBD = JOptionPane.showInputDialog("CAMINHO DO BANCO DE DADOS NÃO ENCONTRADO: \nCOLAR CAMINHO: ");
+            if (LocalBD == null) {
+                JOptionPane.showMessageDialog(null, "DEIXANDO EM BRANCO NÃO SERÁ POSSIVEL LER E EDITAR OS REGISTROS!");
+            } else {
+                con.setLocalBD(LocalBD);
+                con.SaveConfig();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "BANCO DE DADOS CARREGADO :)", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public void AlteraChaminhoBD() {
+        Class_Connection con = new Class_Connection();
+        String caminho = con.getLocalBD();
+        if (caminho.contains(".accdb")) {
+            int confirma = JOptionPane.showConfirmDialog(null, "O PROCESSO NÃO PODERÁ SER DESFEITO!\n CONTINUAR? ",
+                    "CANCELAR", JOptionPane.YES_NO_OPTION);
+            if (confirma == 0) {
+                String LocalBD = JOptionPane.showInputDialog("Colar caminho do banco de dados");
+                con.setLocalBD(LocalBD);
+                con.SaveConfig();
+            } else {
+                JOptionPane.showMessageDialog(null, "DEIXANDO EM BRANCO NÃO SERÁ POSSIVEL LER E EDITAR OS REGISTROS!");
+            }
+        } else {
+            ChecaCaminhoBD();
+        }
     }
 
     public void ClickLinhaChave() {
@@ -442,16 +571,23 @@ public class TelaInicial extends javax.swing.JFrame {
         String col_1 = String.valueOf(tbBuscaChave.getValueAt(linha, 1));
         String col_2 = String.valueOf(tbBuscaChave.getValueAt(linha, 2));
 
-        testeNum.setText(col_0);
-        testeNome.setText(col_1);
-        testeDep.setText(col_2);
+    }
+
+    public void clickLinhaPessoa() {
+        int linha = tbBuscaPessoa.getSelectedRow();
+        String col_0 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 0));
+        String col_1 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 1));
+        String col_2 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 2));
+        String col_3 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 3));
+        String col_4 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 4));
+
     }
 
     public void BuscaChave() {
         String Busca = null;
         Class_Connection con = new Class_Connection();
         con.Conecta();
-        Chave chave = new Chave();
+        Class_Chave chave = new Class_Chave();
 
         Busca = txtBuscaChave.getText();
         chave.TabelaBuscaChave(tbBuscaChave, Busca);
@@ -462,7 +598,7 @@ public class TelaInicial extends javax.swing.JFrame {
         String Busca = null;
         Class_Connection con = new Class_Connection();
         con.Conecta();
-        Pessoa pessoa = new Pessoa();
+        Class_Pessoa pessoa = new Class_Pessoa();
 
         Busca = txtBuscaPessoa.getText();
         pessoa.TabelaBuscaPessoa(tbBuscaPessoa, Busca);
@@ -508,41 +644,38 @@ public class TelaInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FUNDO;
     private javax.swing.JLabel FUNDO_CHAVE1;
-    private javax.swing.JPanel FUNDO_PAINEL;
     private javax.swing.JLabel FUNDO_PESSOA;
     private javax.swing.JPanel Fundo_Em_Uso;
     private javax.swing.JPanel Fundo_Result_Busca;
     private javax.swing.JPanel Fundo_Result_Busca1;
     private javax.swing.JFormattedTextField JFODataSaida;
     private javax.swing.JFormattedTextField JFOHoraSaida;
+    private javax.swing.JMenuItem btnAlterarChave;
+    private javax.swing.JMenuItem btnAlterarPessoa;
+    private javax.swing.JMenuItem btnArquivos;
     private javax.swing.JButton btnBuscaChave;
     private javax.swing.JButton btnBuscaPessoa;
+    private javax.swing.JMenuItem btnCadastrarChave;
+    private javax.swing.JMenuItem btnCadastrarPessoa;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JMenuBar menuSuperior;
     private javax.swing.JTable tbBuscaChave;
     private javax.swing.JTable tbBuscaPessoa;
     private javax.swing.JTable tbEmUso;
-    private javax.swing.JTextField testeDep;
-    private javax.swing.JTextField testeNome;
-    private javax.swing.JTextField testeNum;
     private javax.swing.JTextField txtBuscaChave;
     private javax.swing.JTextField txtBuscaPessoa;
-    private javax.swing.JLabel txtEmBrancoChave;
-    private javax.swing.JLabel txtEmBrancoPessoa;
     private javax.swing.JTextField txtTotChave;
     private javax.swing.JTextField txtTotPessoas;
     // End of variables declaration//GEN-END:variables
