@@ -5,12 +5,17 @@
  */
 package Class;
 
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 /**
  *
@@ -169,12 +174,28 @@ public class Class_Chave {
         con.Conecta();
         DefaultTableModel modelo = (DefaultTableModel) tbBusca.getModel();
         modelo.setNumRows(0);
-        tbBusca.getColumnModel().getColumn(0);
+
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JTableHeader header = tbBusca.getTableHeader();
+        DefaultTableCellHeaderRenderer centralizadoH = (DefaultTableCellHeaderRenderer) header.getDefaultRenderer();
+
+        centralizadoH.setHorizontalAlignment(SwingConstants.CENTER);
+        int i = 0;
+
+        while (i < 3) {
+            tbBusca.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+            tbBusca.getColumnModel().getColumn(1).setCellRenderer(centralizado);
+            tbBusca.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+            i++;
+        }
+
         try {
-            PreparedStatement pstmstrComandoSQL = null;
-            pstmstrComandoSQL = con.Conexao.prepareStatement("SELECT * FROM TBChave WHERE local LIKE '*"
+            PreparedStatement strComandoSQL = null;
+            strComandoSQL = con.Conexao.prepareStatement("SELECT * FROM TBChave WHERE local LIKE '*"
                     + Busca + "*' or Num_Chave LIKE '*" + Busca + "*'  ORDER BY Num_Chave");
-            con.rsBusca = pstmstrComandoSQL.executeQuery();
+            con.rsBusca = strComandoSQL.executeQuery();
             while (con.rsBusca.next()) {
                 modelo.addRow(new Object[]{
                     con.rsBusca.getInt(1),
@@ -186,7 +207,7 @@ public class Class_Chave {
             con.Comando.close();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS PARA A TABLE!");
+            JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS PARA A TABLE CHAVE!");
         }
     }
 
@@ -195,30 +216,45 @@ public class Class_Chave {
         con.Conecta();
         DefaultTableModel modelo = (DefaultTableModel) tbChave.getModel();
         modelo.setNumRows(0);
-        tbChave.getColumnModel().getColumn(0);
+
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JTableHeader header = tbChave.getTableHeader();
+        DefaultTableCellHeaderRenderer centralizadoH = (DefaultTableCellHeaderRenderer) header.getDefaultRenderer();
+
+        centralizadoH.setHorizontalAlignment(SwingConstants.CENTER);
+
+        tbChave.setBackground(Color.green);
+        int i = 0;
+
+        while (i < 6) {
+            tbChave.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+            i++;
+        }
         try {
-            PreparedStatement pstmstrComandoSQL = null;
-            pstmstrComandoSQL = con.Conexao.prepareStatement("SELECT Num_Chave, local, nome, dataSaida, horaSaida from((TBHistorico"
+            PreparedStatement strComandoSQL = null;
+            strComandoSQL = con.Conexao.prepareStatement("SELECT  idHistorico, Num_Chave, local, nome, dataSaida, horaSaida from((TBHistorico"
                     + " INNER JOIN TBChave ON TBHistorico.idChave = TBChave.Num_Chave)"
-                    + " INNER JOIN TBPessoa ON TBHistorico.idPessoa = TBPessoa.idPessoa)");
-            con.rsBusca = pstmstrComandoSQL.executeQuery();
+                    + " INNER JOIN TBPessoa ON TBHistorico.idPessoa = TBPessoa.idPessoa) where idChave =1 and horaRetorno = 'vazio' "
+                    + " ORDER BY horaSaida");
+            con.rsBusca = strComandoSQL.executeQuery();
+
             while (con.rsBusca.next()) {
                 modelo.addRow(new Object[]{
                     con.rsBusca.getInt(1),
-                    con.rsBusca.getString(2),
+                    con.rsBusca.getInt(2),
                     con.rsBusca.getString(3),
                     con.rsBusca.getString(4),
-                    con.rsBusca.getString(5)});
+                    con.rsBusca.getString(5),
+                    con.rsBusca.getString(6)});
             }
             con.Conexao.close();
+            con.Comando.close();
 
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "ERRO AO CARREGAR OS DADOS!!");
+        }
     }
-    catch (Exception ex
-
-    
-        ) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar os dados!");
-    }
-}
 
 }

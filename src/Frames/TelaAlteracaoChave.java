@@ -59,6 +59,11 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbBuscaChave.setModel(new javax.swing.table.DefaultTableModel(
@@ -66,14 +71,14 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NUMERO", "LOCAL", "DPT"
+                "NUM", "LOCAL", "DPTO", "DISP"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -175,7 +180,7 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
         FUNDO_BUSCA_CHAVE.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BUSCAR CHAVE", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         getContentPane().add(FUNDO_BUSCA_CHAVE, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 440, 100));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOVOS DADOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DADOS NOVOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 420, 120));
 
         btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -264,6 +269,13 @@ public class TelaAlteracaoChave extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "CHAVE NÃO SELECIONADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        TelaInicial tela1 = new TelaInicial();
+        int zero = 0;     
+        tela1.setJanelaAlteChave(zero);
+    }//GEN-LAST:event_formWindowClosing
 
     public void Atualiza() {
         BuscaChave();

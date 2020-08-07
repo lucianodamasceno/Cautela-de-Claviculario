@@ -21,6 +21,7 @@ public class TelaCadastroChave extends javax.swing.JFrame {
      */
     public TelaCadastroChave() {
         initComponents();
+        
     }
 
     public void CadastrarChave() {
@@ -69,40 +70,27 @@ public class TelaCadastroChave extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CADASTRO DE CHAVE");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("NUM:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 20));
-
-        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNumeroKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 50, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 25));
+        getContentPane().add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 50, 25));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("LOCAL:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 20));
-
-        txtLocal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtLocalKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 300, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 25));
+        getContentPane().add(txtLocal, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 300, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("DPTO:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 20));
-
-        txtDepartamento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDepartamentoKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 190, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 25));
+        getContentPane().add(txtDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 190, 25));
 
         btnCadastrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/carraca.png"))); // NOI18N
@@ -127,32 +115,12 @@ public class TelaCadastroChave extends javax.swing.JFrame {
         CadastrarChave();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void txtLocalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLocalKeyPressed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if ((txtNumero.getText() != null) && (txtLocal.getText() != null)) {
-            CadastrarChave();
-        } else {
-            JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-        }
-
-    }//GEN-LAST:event_txtLocalKeyPressed
-
-    private void txtNumeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if ((txtNumero.getText() != null) && (txtLocal.getText() != null)) {
-                CadastrarChave();
-            } else {
-                JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_txtNumeroKeyPressed
-
-    private void txtDepartamentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDepartamentoKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-            JOptionPane.showMessageDialog(null, " DADOS EM BRANCO!", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_txtDepartamentoKeyPressed
+        TelaInicial tela1 = new TelaInicial();
+        int zero = 0;     
+        tela1.setJanelaCaChave(zero);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

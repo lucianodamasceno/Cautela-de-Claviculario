@@ -22,6 +22,7 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
      */
     public TelaAlteracaoPessoa() {
         initComponents();
+        BuscaPessoa();
     }
 
     /**
@@ -33,15 +34,26 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtEmBrancoPessoa = new javax.swing.JLabel();
-        txtBuscaPessoa = new javax.swing.JTextField();
-        btnBuscaPessoa = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
+        AtuaPessoa1 = new javax.swing.JPanel();
+        txtAtualNome = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtAtualCPF = new javax.swing.JFormattedTextField();
+        txtAtualTelefone = new javax.swing.JFormattedTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtAtualEmpresa = new javax.swing.JTextField();
+        txtAtualID = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        FUNDO_PAINEL = new javax.swing.JPanel();
         btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbBuscaPessoa = new javax.swing.JTable();
         Fundo_Result_Busca1 = new javax.swing.JPanel();
         FUNDO = new javax.swing.JLabel();
+        txtBuscaPessoa = new javax.swing.JTextField();
+        btnBuscaPessoa = new javax.swing.JButton();
         FUNDO_BUSCA_PESSOA = new javax.swing.JLabel();
         AtuaPessoa = new javax.swing.JPanel();
         txtNovoNome = new javax.swing.JTextField();
@@ -52,53 +64,69 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNovaEmpresa = new javax.swing.JTextField();
-        AtuaPessoa1 = new javax.swing.JPanel();
-        txtAtualNome = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtAtualCPF = new javax.swing.JFormattedTextField();
-        txtAtualTelefone = new javax.swing.JFormattedTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtAtualEmpresa = new javax.swing.JTextField();
-        FUNDO_PAINEL = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        txtNovoId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtEmBrancoPessoa.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        txtEmBrancoPessoa.setForeground(new java.awt.Color(102, 102, 102));
-        txtEmBrancoPessoa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtEmBrancoPessoa.setText("DEIXAR EM BRANCO PARA LISTAR TUDO");
-        getContentPane().add(txtEmBrancoPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, 25));
+        AtuaPessoa1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DADOS ATUAIS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        AtuaPessoa1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtBuscaPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtBuscaPessoaKeyPressed(evt);
-            }
-        });
-        getContentPane().add(txtBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 400, 25));
+        txtAtualNome.setEditable(false);
+        AtuaPessoa1.add(txtAtualNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 55, 320, 25));
 
-        btnBuscaPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/procurar.png"))); // NOI18N
-        btnBuscaPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscaPessoaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 42, 40, 40));
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setText("NOME:");
+        AtuaPessoa1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 55, -1, 25));
 
-        btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lixo.png"))); // NOI18N
-        btnExcluir.setText("EXCLUIR");
-        btnExcluir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.red, java.awt.Color.red, java.awt.Color.red, java.awt.Color.red));
-        btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 140, 50));
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("CPF:");
+        AtuaPessoa1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, -1, 25));
+
+        txtAtualCPF.setEditable(false);
+        try {
+            txtAtualCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###-###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        AtuaPessoa1.add(txtAtualCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 85, 110, 25));
+
+        txtAtualTelefone.setEditable(false);
+        try {
+            txtAtualTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        AtuaPessoa1.add(txtAtualTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 115, 110, 25));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("TELFONE:");
+        AtuaPessoa1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 115, -1, 25));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("EMPRESA:");
+        AtuaPessoa1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, -1, 25));
+
+        txtAtualEmpresa.setEditable(false);
+        AtuaPessoa1.add(txtAtualEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 145, 190, 25));
+
+        txtAtualID.setEditable(false);
+        AtuaPessoa1.add(txtAtualID, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 25, 50, 25));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("ID:");
+        AtuaPessoa1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 25, -1, 25));
+
+        getContentPane().add(AtuaPessoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 420, 180));
+
+        FUNDO_PAINEL.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAlterar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/carraca.png"))); // NOI18N
@@ -110,21 +138,33 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
                 btnAlterarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 140, 50));
+        FUNDO_PAINEL.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 140, 50));
+
+        btnExcluir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lixo.png"))); // NOI18N
+        btnExcluir.setText("EXCLUIR");
+        btnExcluir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.red, java.awt.Color.red, java.awt.Color.red, java.awt.Color.red));
+        btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+        FUNDO_PAINEL.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 140, 50));
 
         tbBuscaPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "NOME", "CPF", "TELEFONE", "EMPRESA"
+                "ID", "NOME", "CPF", "TELEFONE", "EMPRESA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -141,110 +181,83 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tbBuscaPessoa);
+        if (tbBuscaPessoa.getColumnModel().getColumnCount() > 0) {
+            tbBuscaPessoa.getColumnModel().getColumn(0).setMinWidth(0);
+            tbBuscaPessoa.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tbBuscaPessoa.getColumnModel().getColumn(0).setMaxWidth(50);
+        }
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 502, 180));
+        FUNDO_PAINEL.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 502, 180));
 
         Fundo_Result_Busca1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LOCALIZADO", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         Fundo_Result_Busca1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Fundo_Result_Busca1.add(FUNDO);
 
-        getContentPane().add(Fundo_Result_Busca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 500, 200));
+        FUNDO_PAINEL.add(Fundo_Result_Busca1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 500, 200));
+
+        txtBuscaPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscaPessoaKeyPressed(evt);
+            }
+        });
+        FUNDO_PAINEL.add(txtBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 400, 25));
+
+        btnBuscaPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/procurar.png"))); // NOI18N
+        btnBuscaPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaPessoaActionPerformed(evt);
+            }
+        });
+        FUNDO_PAINEL.add(btnBuscaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 40, 40));
 
         FUNDO_BUSCA_PESSOA.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "BUSCAR PESSOA", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        getContentPane().add(FUNDO_BUSCA_PESSOA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 100));
+        FUNDO_PAINEL.add(FUNDO_BUSCA_PESSOA, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 500, 100));
 
-        AtuaPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "NOVOS DADOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        AtuaPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DADOS NOVOS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         AtuaPessoa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        AtuaPessoa.add(txtNovoNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 320, -1));
+        AtuaPessoa.add(txtNovoNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 320, 25));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("NOME:");
-        AtuaPessoa.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        AtuaPessoa.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 25));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("CPF:");
-        AtuaPessoa.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        AtuaPessoa.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, 25));
 
         try {
             txtNovoCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###-###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        AtuaPessoa.add(txtNovoCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 110, -1));
+        AtuaPessoa.add(txtNovoCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 110, 25));
 
         try {
             txtNovoTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        AtuaPessoa.add(txtNovoTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 110, -1));
+        AtuaPessoa.add(txtNovoTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 110, 25));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("TELFONE:");
-        AtuaPessoa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        AtuaPessoa.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 25));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("EMPRESA:");
-        AtuaPessoa.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-        AtuaPessoa.add(txtNovaEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 190, -1));
+        AtuaPessoa.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, 25));
+        AtuaPessoa.add(txtNovaEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 190, 25));
 
-        getContentPane().add(AtuaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 420, 150));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("ID:");
+        AtuaPessoa.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 25));
 
-        AtuaPessoa1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DADOS ATUAIS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-        AtuaPessoa1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        txtNovoId.setEditable(false);
+        AtuaPessoa.add(txtNovoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 50, 25));
 
-        txtAtualNome.setEditable(false);
-        AtuaPessoa1.add(txtAtualNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 320, -1));
+        FUNDO_PAINEL.add(AtuaPessoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 210, 420, 180));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setText("NOME:");
-        AtuaPessoa1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("CPF:");
-        AtuaPessoa1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-
-        txtAtualCPF.setEditable(false);
-        try {
-            txtAtualCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-###-###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        AtuaPessoa1.add(txtAtualCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 110, -1));
-
-        txtAtualTelefone.setEditable(false);
-        try {
-            txtAtualTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        AtuaPessoa1.add(txtAtualTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 110, -1));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setText("TELFONE:");
-        AtuaPessoa1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setText("EMPRESA:");
-        AtuaPessoa1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-
-        txtAtualEmpresa.setEditable(false);
-        AtuaPessoa1.add(txtAtualEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 190, -1));
-
-        getContentPane().add(AtuaPessoa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, 420, 150));
-
-        javax.swing.GroupLayout FUNDO_PAINELLayout = new javax.swing.GroupLayout(FUNDO_PAINEL);
-        FUNDO_PAINEL.setLayout(FUNDO_PAINELLayout);
-        FUNDO_PAINELLayout.setHorizontalGroup(
-            FUNDO_PAINELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
-        );
-        FUNDO_PAINELLayout.setVerticalGroup(
-            FUNDO_PAINELLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(FUNDO_PAINEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 410));
+        getContentPane().add(FUNDO_PAINEL, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 490));
 
         pack();
         setLocationRelativeTo(null);
@@ -265,16 +278,19 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
         String col_1 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 1));
         String col_2 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 2));
         String col_3 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 3));
+        String col_4 = String.valueOf(tbBuscaPessoa.getValueAt(linha, 4));
 
-        txtAtualNome.setText(col_0);
-        txtAtualCPF.setText(col_1);
-        txtAtualTelefone.setText(col_2);
-        txtAtualEmpresa.setText(col_3);
+
+        txtAtualID.setText(col_0);
+        txtNovoId.setText(col_0);
+        txtAtualNome.setText(col_1);
+        txtAtualCPF.setText(col_2);
+        txtAtualTelefone.setText(col_3);
+        txtAtualEmpresa.setText(col_4);
     }
 
     private void txtBuscaPessoaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaPessoaKeyPressed
         // TODO add your handling code here:
-        txtEmBrancoPessoa.setVisible(false);
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             BuscaPessoa();
     }//GEN-LAST:event_txtBuscaPessoaKeyPressed
@@ -282,7 +298,7 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         try {
-            String where = txtAtualCPF.getText();
+            String where = txtAtualID.getText();
             int escolha = JOptionPane.showConfirmDialog(null, "A EXCLUSÃO NÃO PODERÁ SER DESFEITA! \nCONTINUAR?", "EXCLUIR", JOptionPane.YES_NO_OPTION);
             if (escolha == 0) {
                 Class_Pessoa pessoa = new Class_Pessoa();
@@ -297,12 +313,13 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
 
     public void AlterarPessoa(){
          try {
+            
             String strNovoNome = txtNovoNome.getText().toUpperCase();
             String strNovoCPF = txtNovoCPF.getText().toUpperCase();
             String srtNovoTel = txtNovoTelefone.getText().toUpperCase();
             String strNovaEmpresa = txtNovaEmpresa.getText().toUpperCase();
 
-            String where = txtAtualCPF.getText();
+            String where = txtAtualID.getText();
 
             Class_Pessoa pessoa = new Class_Pessoa();
             pessoa.AlterarPessoa(strNovoNome, strNovoCPF, srtNovoTel, strNovaEmpresa, where);
@@ -342,6 +359,13 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
         // TODO add your handling code here:
         ClickLinha();
     }//GEN-LAST:event_tbBuscaPessoaMousePressed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        TelaInicial tela1 = new TelaInicial();
+        int zero = 0;     
+        tela1.setJanelaAltePessoa(zero);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -389,6 +413,7 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscaPessoa;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -396,16 +421,18 @@ public class TelaAlteracaoPessoa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tbBuscaPessoa;
     private javax.swing.JFormattedTextField txtAtualCPF;
     private javax.swing.JTextField txtAtualEmpresa;
+    private javax.swing.JTextField txtAtualID;
     private javax.swing.JTextField txtAtualNome;
     private javax.swing.JFormattedTextField txtAtualTelefone;
     private javax.swing.JTextField txtBuscaPessoa;
-    private javax.swing.JLabel txtEmBrancoPessoa;
     private javax.swing.JTextField txtNovaEmpresa;
     private javax.swing.JFormattedTextField txtNovoCPF;
+    private javax.swing.JTextField txtNovoId;
     private javax.swing.JTextField txtNovoNome;
     private javax.swing.JFormattedTextField txtNovoTelefone;
     // End of variables declaration//GEN-END:variables

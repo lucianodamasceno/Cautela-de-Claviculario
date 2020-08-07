@@ -9,7 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.SwingContainer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 /**
  *
@@ -102,7 +107,7 @@ public class Class_Pessoa {
         Conexao = con.Conexao;
         try {
             PreparedStatement strComandoSQL = null;
-            strComandoSQL = Conexao.prepareStatement(" DELETE from TBPessoa WHERE CPF ='" + where + "'");
+            strComandoSQL = Conexao.prepareStatement(" DELETE from TBPessoa WHERE idPessoa ='" + where + "'");
             int intRegistro = strComandoSQL.executeUpdate();
             if (intRegistro == 0) {
                 JOptionPane.showMessageDialog(null, "EXLUSÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
@@ -121,7 +126,7 @@ public class Class_Pessoa {
         try {
             PreparedStatement strComandoSQL = null;
             strComandoSQL = Conexao.prepareStatement("UPDATE TBPessoa SET nome ='" + strNovoNome
-                    + "', CPF ='" + strNovoCPF + "', telefone ='" + strNovoTel + "', empresa ='" + strNovaEmp + "' WHERE CPF ='" + where + "'");
+                    + "', CPF ='" + strNovoCPF + "', telefone ='" + strNovoTel + "', empresa ='" + strNovaEmp + "' WHERE idPessoa ='" + where + "'");
             int intRegistro = strComandoSQL.executeUpdate();
             if (intRegistro != 0) {
                 JOptionPane.showMessageDialog(null, "ALTERAÇÃO EFETUADA", "MENSAGEM", JOptionPane.INFORMATION_MESSAGE);
@@ -137,6 +142,19 @@ public class Class_Pessoa {
         con.Conecta();
         DefaultTableModel modelo = (DefaultTableModel) tbBusca.getModel();
         modelo.setNumRows(0);
+        DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
+        centralizado.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        JTableHeader header = tbBusca.getTableHeader();
+        DefaultTableCellHeaderRenderer centralizadoH = (DefaultTableCellHeaderRenderer) header.getDefaultRenderer();
+        centralizadoH.setHorizontalAlignment(SwingConstants.CENTER);
+        int i =0;
+        
+        while(i<5){
+        tbBusca.getColumnModel().getColumn(i).setCellRenderer(centralizado);
+        i++;
+        }
+        
         tbBusca.getColumnModel().getColumn(0);
         try {
             PreparedStatement pstmstrComandoSQL = null;
@@ -155,7 +173,7 @@ public class Class_Pessoa {
             con.Comando.close();
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS PARA A TABLE!");
+            JOptionPane.showMessageDialog(null, "ERRO AO OBTER DADOS PARA A TABLE PESSOA!");
         }
     }
 
